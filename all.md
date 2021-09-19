@@ -115,9 +115,17 @@ Packet-Switching (What we currently use):
 - Cut through switch can reduce delays. 
 - Each packet travels independently (lookups happen independently regardless of the previous packet).
 - No link resources are reserved, packet switching leverages statistical multiplexing.
+- allows more useres to use the network
+- probability that the number of active users > 10 = 0.0004 (in a network of 35 users approx ~ calc using binomial)
+- resources are allocated on demand
+#### Binomial Probability Distribution
+- Fixed number of observations (trails), n
+- Binary random variable
+- Constant probability for each observation
 
 
 #### Peek ahead: Two key network-core functions
+- What a router does
 Forwarding:
 - local action: move arriving packets from router's input link to appropiate router output link
 Routing:
@@ -133,5 +141,78 @@ Circuit-Switching:
 - inefficient (bursty communication patterns)/ non scalable
 - fixed data rates
 - connection state maintenance
+- limit to sharing total capacity
+- less users can use the network
+- resources are provisioned right from the start (reservations need to be made)
+- packets travel the same path in the same link
+
+
+
+#### Timing in packet switching (Store and forward):
+- Packet switch processes/forwards a packet after it is recieved entirely
+- each packet travels independently
+- no link resources are reserved (using statistical multiplexing)
+- Statisical multiplexing relies on the assumption that not all flows burst at the same time
+
+#### Bursts in Traffic & overload:
+- To combat overloaded capacity, we use statistical multiplexing
+- When the capcity is overloaded (to much data at once):
+- **Transient Overload**: Two links are sending data to a packet switch, where packets from both links are recieved at the same time
+- To combat a **Transient Overload** is to queue the overload into a packet buffer.
+- **Persistent overload**, infinite overload from 2 or more links, the queue size in the buffer is limited, hence packets will eventually be dropped
+
+#### Packet's pros and cons:
+- Packet is great for "bursty" data (not always sending)
+- Packet is simpler with no call setup and great for resource sharing
+- Congestion is possible, resulting in packet delay/loss due to buffer overflow
+- Protocols needed for reliable data transfer, congestion control
+- bandwith guarantees traditionally used for audio/video applications
+
+<hr />
+
+### Internet Structure: a "network of networks"
+- Hosts connect to Internet via **access** ISPs (residential, enterprise)
+- Access ISPs must be interconnected (any two hosts can send packets to eachother)
+- Resulting network of networks is very complex
+- Access networks are connected to regional ISPs then to larger global ISP's which then these ISP's are connected to eachother on a global scale
+- Global ISPs connected through IXP (Internet exchange point)
+- Content provider networks (google, facebook): private network connecting their data centers to Internet, bypassing teir-1 regional ISPs
+
+
+#### Performance: loss, delay, throughput
+- arrival rate to link temporarily exceeds output link capacity: packet loss
+- packets queue in router buffers, if full, can lead to packet loss/delay
+- **transmission delay** packet being transmitted
+- **packets in buffers** queueing delay
+- free (available) buffers: arriving packets
+- dropped (loss) if no free buffers
+- Four sources of packet delay **transmission**, **propogation**, **nodal processing**, **queueing**
+
+
+#### nodal processing:
+- check bit errors
+- determine output link
+- as low as nanoseconds
+
+#### queueing delay:
+- time waiting at output link for transmission
+- dependant on congestion level of the router
+
+#### transmission delay
+- Dependant on packet length (bits)
+- Dependant on transmission rate (bps)
+- d_trans = packet length / transmission rate
+
+#### propogation delay:
+- length of physical link (d)
+- propogation speed (s)
+- d_prop = d/s
+- think of real world physics
+
+#### throughput:
+- rate that bits are sent from sender to receiver (end to end)
+- instantaneous rate: rate at a given point in time
+- average: rate over a longer period of time
+- often bottlenecks (links)
 
 
