@@ -200,7 +200,7 @@ Circuit-Switching:
 
 #### transmission delay
 - Dependant on packet length (bits)
-- Dependant on transmission rate (bps)
+- Dependant on transmission rate (bps) or bandwith
 - d_trans = packet length / transmission rate
 
 #### propogation delay:
@@ -215,4 +215,119 @@ Circuit-Switching:
 - average: rate over a longer period of time
 - often bottlenecks (links)
 
+<hr />
 
+## Week 2
+
+### Tasks in networking
+What does it take to send packets across
+- Prepare data (Application)
+- Ensure packets get to the dst process (Transport)
+- Deliver packets across global network (Network)
+- Delivery packets within local network to next hop (Datalink)
+
+Internet protocol stack
+- application: support network applications (HTTP SMTP)
+- transport: process-process data transfer (TCP, UDP)
+- network: routing of datagrams from source to destination (IP, routing protocols)
+- link: data transfer between neighboring network elements (Ethernet, WiFi, PPP)
+- physical: bts "on the wire"
+
+Three Observations:
+Each layer depends on the layer below
+- supports the layer above
+- independent of others
+- There are multiple versions of a layer (TCP, UDP) depending on what is being done
+- There is only one IP layer
+
+- layering is good for extension and creation of new applications, otherwise each new application would need to be **re-implemented** for every network technology
+- Introducing an intermediate layer provides a **common** abstraction for various network technologies
+- makes it easy to introduce new protocols
+- prevents technology from one layer affecting another layer
+
+cons of layering:
+Layers may duplicate lower-level functionality
+information hiding may hurt performance
+headers start to get large
+layer violations when the gains too great to resist
+layer violations when network doesn't trust ends
+
+Routers - l3 packet switches
+Switches (link layer switches, bridges) - l2 packet switches
+Hosts - applications generate data/messages
+
+<hr />
+
+#### Application Layer:
+- Web & HTTP, electronic email (SMTP)
+- write programs that run on different end systems
+- communicate over network
+- no need to write software for network core devices
+- network-core devices do not run user applications
+- applications on end systems allow for rapid app development, propogation
+
+**Client-server paradigm**
+Server:
+- always-on host
+- permanent IP address
+- datacenters for scaling
+
+Clients:
+- contanct, communicate with server
+- may be intermittently connected
+- may have dynamic IP addresses
+- do not communicate directly with each other
+- HTTP, IMAP, FTP
+
+**Peer-peer architecture**
+- end systems directly communicate
+- peers request and provide service to other peers
+- self scalability (each peer brings new service capacity)
+
+**Prcesses Communicating**
+A program running within a host
+- within same host, two processes communicate using inter-process communication (defined by OS)
+- processes in different hosts communicate by exchanging **messages**
+
+**Sockets**
+- doorways in which processes send messages to eachother
+- proces sends/recieves messages to/from its socket
+- socket analogous to door
+- sending process shoves message out the door
+- sending process relies on transport infrastructure on other side of door to deliver message to socket at receving process
+- two sockets (one on each side)
+
+#### Application layer protocol defines:
+- Types of messages exchanged (request, response)
+- message syntax (what fields in messages & how fields are delineated)
+- message semantics (meaning of information in fields)
+- rules
+
+**open protocols**
+- HTTP, SMPT, WebRTC
+- defined in RFCs, everyone has access to protocol definition
+
+**propietary protocols** (not open source)
+- Skype, Zoom, Teams
+
+#### Transport layer
+
+What transport service does an app need?
+- data integrity (reliable data transfer depending on application)
+- timing (some apps require low delay to be effective)
+- throughput
+- security
+
+**Internet transport protocols services**
+
+##### TCP
+- reliable transport between sending and receiving processes
+- flow control: sender does not overwhelm the receiver
+- congestion control: throttle sender when network overloaded
+- does not provide: timing, minimum throughput gaurantee, security
+- connection-oriented: setup required
+- cannot control the rate to push data
+##### UDP
+- unreliable data transfer between sending and receiving process
+- does not provide: reliability, flow, control, congestion control, timing, throughput gaurantee, security or connection setup.
+- can push out data at whatever rate want (more control)
