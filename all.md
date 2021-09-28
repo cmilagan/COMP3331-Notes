@@ -310,6 +310,59 @@ A program running within a host
 **propietary protocols** (not open source)
 - Skype, Zoom, Teams
 
+
+#### Application Layer: Web & HTTP (Hypertext Transport Protocol)
+- Web page consists of objects, each of which can be stored on different Web servers
+- object can be HTML file, JPEG image, Java applet, audio file
+- web page consists of base **HTML-file** which includes **several referenced objects** each addressable by a **URL**
+
+e.g **www.someschool.edu**/someDept/pic.gif
+the bold part is the host name, and the latter is the path name of the file(s)
+
+**URL** (Uniform Resource Locator)
+protocol://host-name[:port]/directory-path/resource
+- protocol: http, ftp, https, smtp etc.
+- hostname: **DNS name**, IP address
+- port
+- directory path & resource
+
+HTTP Overview
+- Web aplication layer protocol
+- Client/server model
+    -   Client: browser that requests, recieves (using HTTP protocols) and displays Web objects
+    -   Server: Web server sends (using HTTP protocol) objects in response to requests
+- HTTP uses TCP (since its more reliable)
+    - client initiates TCP connection
+- HTTP is "stateless"
+
+**HTTP REQUEST METHODS**
+- POST (web page often includes form input)
+- GET sending data to server
+- HEAD requests headers only, that would be returned if specified URL were requested with an HTTP GET method
+- PUT uploads new file (object) to the server, completely replaces file that exists at specified URL with content in entity body of POST HTTP request message
+
+**HTTP response status codes**
+- 200 OK (request suceeded)
+- 301 Moved permanently, requested object moved, new location specified later in this message (300 redirection)
+- 400 Bad request (request msg not understood by server) (400 errors)
+- 505 HTTPVersion not supported
+
+**Cookies (Maintaining user/server state)**
+- HTTP GET/response interaction is **stateless**
+- Cookies are used to maintain some state between transactions
+
+Cookies components:
+1) Cookie header line of HTTP response message
+2) Cookie header line in next HHTP reqest message
+3) Cookie file kept on yser's host, managed by user's browser
+4) backend database at Web site
+
+
+**HTTP Performance**
+- Page Load Time (PLT) Measures web performance
+- Dependant on tha amount of content/structure/protocols and network bandwith
+
+
 #### Transport layer
 
 What transport service does an app need?
