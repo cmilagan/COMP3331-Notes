@@ -412,4 +412,4 @@ Otherwise if no entries are found for the associated domain name, it must go thr
 
 Root NS -> TLD NS -> Authoritative NS 
 
-![dns process](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cloudflare.com%2Flearning%2Fdns%2Fwhat-is-dns%2F&psig=AOvVaw1AlL7N8AqNUmPhhGSo9HBV&ust=1638763789231000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCHtP7ky_QCFQAAAAAdAAAAABAd)
+![dns process](https://www.cloudflare.com/img/learning/dns/what-is-dns/dns-lookup-diagram.png)
