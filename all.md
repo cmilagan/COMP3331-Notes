@@ -384,3 +384,32 @@ What transport service does an app need?
 - unreliable data transfer between sending and receiving process
 - does not provide: reliability, flow, control, congestion control, timing, throughput gaurantee, security or connection setup.
 - can push out data at whatever rate want (more control)
+
+<hr />
+
+#### DNS
+
+##### Overview:
+DNS is usefull in such a way that we can use words or phrases to access inforamtion online (via domain names: e.g google.com). This is useful because servers actually use ip addresses.
+Which is extremely difficult for humans to interpret/remember.
+
+So how does your computer get the appropiate ip address from the domain name?
+
+###### Local Cache:
+Your computer/browser has a local cache of any domains previously accessed, saving all relevant information such as the IP address for future use to improve loading time.
+
+Otherwise if no entries are found for the associated domain name, it must go through a DNS recursive resolver
+
+###### DNS recursive resolver
+- Computer sends a query to a DNS resolver (usually managed by ISP) asking for an IP address for the domain name
+- This DNS resolver has its own seperate cache, which similarly stores any DNS entries and their associated IP addresses.
+- If an entry is found in its cache, it sends back the IP address to the requesting device, which the device can then communicate directly with the IP address.
+
+1. Otherwise if the DNS is not found in the cache, it sends a request to a ROOT name server (Top of the DNS hierarchy, provides details of the top level domain servers)
+2. ROOT server refers us to top level domain server (e.g. .com), which is then queried again by the DNS resolver (TLD - contains information for domains with a specific extension .com .org .net)'
+3. TLD knows the location of the authoritative name server, which is sent back to the resolver so that the resolver can then query the authoritative name server.
+4. After querying the authoritative name server, the resolver should then hopefully have the associated IP address for the specified domain name. (Authoritative name server is the last step)
+
+Root NS -> TLD NS -> Authoritative NS 
+
+![dns process](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cloudflare.com%2Flearning%2Fdns%2Fwhat-is-dns%2F&psig=AOvVaw1AlL7N8AqNUmPhhGSo9HBV&ust=1638763789231000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCHtP7ky_QCFQAAAAAdAAAAABAd)
